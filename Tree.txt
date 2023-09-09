@@ -1,0 +1,47 @@
+#include<iostream>
+struct TreeNode {
+  int val;
+  TreeNode *left;
+  TreeNode *right;
+ 
+ 
+  TreeNode() : val(0), left(nullptr), right(nullptr) {}
+  TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+  TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+};
+ 
+class Solution {
+private:
+    int depth(int &maxdepth,TreeNode* root)
+    {
+        if(root==NULL)return 0;
+        int lh=depth(maxdepth,root->left);
+        int rh=depth(maxdepth,root->right);
+        maxdepth=std::max(maxdepth,lh+rh);
+        return 1+std::max(lh,rh);
+    }
+public:
+    int diameterOfBinaryTree(TreeNode* root) {
+        int maxdepth=0;
+        int ans=depth(maxdepth,root);
+        return maxdepth;
+        
+    }
+};
+
+
+
+
+int main() {
+  TreeNode c(15);
+  TreeNode a(10);
+  TreeNode b(12, &a, &b);
+  Solution sol;
+  std::cout<<sol.diameterOfBinaryTree(&b);
+  
+  
+
+
+
+  return 0;
+}
